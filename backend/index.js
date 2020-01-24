@@ -4,6 +4,7 @@ const express = require("express");
 const app = express();
 const morgan = require("morgan");
 const colors = require("colors");
+const errorHandler = require("./middleware/error");
 
 // database
 const { connectDatabase } = require("./database");
@@ -15,6 +16,7 @@ app.use(express.json()); // body parser
 
 // routes
 app.use("/api/tweets", require("./routes/tweet"));
+app.use(errorHandler); // error handling middleware
 
 // express server
 const server = app.listen(PORT, () =>
